@@ -1,0 +1,115 @@
+$: << File.expand_path(File.dirname(__FILE__))  
+
+require 'rubygems'
+require 'gosu'
+require 'player'
+require 'ball'
+require 'good_ball'
+include Gosu
+
+class SpriteDodge < Gosu::Window
+  def initialize
+    super(600, 400, false)
+    @musicnumber = rand(2)
+    @music = Gosu::Song.new(self, "sound/#{@musicnumber}.mp3")
+    @player1 = Player.new(self)
+    @balls = 3.times.map {Ball.new(self)}
+    @good_balls = 2.times.map {Good_Ball.new(self)}
+    @running = true
+    @pause = false
+    @font = Gosu::Font.new(self, "font/ayearwithoutrain.ttf", 43)
+    @hit_sound = Gosu::Sample.new(self, "sound/hit.wav")
+    @get_sound = Gosu::Sample.new(self, "sound/get.wav")
+    @bgnumber = rand(7)
+    @background_image = Gosu::Image.new(self, "bg/#{@bgnumber}.png", true)
+    @score = 0
+    @health = 100
+  end
+  
+  def button_down(id)
+    if id == Gosu::Button::KbP
+      if @pause == false
+        @pause = true
+      else
+        @pause = false
+      end
+    end
+    if id == Gosu::Button::KbQ
+      @running = false
+      close
+    end
+  end
+  
+  def update
+    if @running == true and @pause == false
+      
+      if button_down? Gosu::Button::KbLeft
+        @player1.move_left
+      end
+      if button_down? Gosu::Button::KbRight
+        @player1.move_right
+      end
+      
+      @balls.each {|ball| ball.update}
+      
+      @good_balls.each {|good_ball| good_ball.update}
+
+      if @player1.hit_by? @balls
+        @health -= 10
+        @hit_sound.play(vol=0.5, speed=1, looping=false)
+        stop_game
+      end
+      
+      if @player1.hit_by_good? @good_balls
+        @score += 10
+        @get_sound.play(vol=0.5, speed=1, looping=false)
+        stop_game
+      end
+      
+    else
+      # The game is currently stopped
+      if button_down? Gosu::Button::KbSpace
+        refresh_game
+      end
+      if button_down? Gosu::Button::KbR
+        restart_game
+      end
+    end
+  end
+  
+  def draw
+    @music.play(looping = true)
+    @background_image.draw(0, -177, 0)
+    @player1.draw
+    @balls.each {|ball| ball.draw} if @running == false
+    @balls.each {|ball| ball.draw_rot} if @running == true
+    @good_balls.each {|good_ball| good_ball.draw}
+    @font.draw_rel("The game is paused.", 300, 200, 10, 0.5, 0.5, factor_x=1, factor_y=1) if @pause == true
+    @font.draw_rel("Score: #{@score}", 40, 10, 10, 0.0, 0.0, factor_x=1, factor_y=1)
+    @font.draw_rel("Health: #{@health}", 450, 10, 10, 0.0, 0.0, factor_x=1, factor_y=1)
+    @font.draw_rel("GAME OVER. Press R to restart!", 300, 200, 13, 0.5, 0.5, factor_x=1, factor_y=1) if @health <= 0
+  end
+  
+  def stop_game
+    @running = false
+  end
+  
+  def refresh_game
+    @running = true
+    @balls.each {|ball| ball.reset}
+    @good_balls.each {|good_ball| good_ball.reset}
+  end
+  
+  def restart_game
+    @running = true
+    @balls.each {|ball| ball.reset}
+    @good_balls.each {|good_ball| good_ball.reset}
+    @score = 0
+    @health = 100
+    @background_image.draw(0, 0, 0)
+  end
+
+end
+
+window = SpriteDodge.new
+window.show
