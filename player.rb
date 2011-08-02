@@ -28,10 +28,10 @@ class Player
   end
   
   def hit_by?(balls)
-    balls.any? {|ball| Gosu::distance(@x, @y, ball.x, ball.y) < 27}
+    balls.any? {|ball| Gosu::distance(@x, @y, ball.x, ball.y) < 30}
   end
   
   def hit_by_good?(good_balls)
-    good_balls.any? {|good_ball| Gosu::distance(@x, @y, good_ball.x, good_ball.y) < 23}
+    good_balls.any? {|good_ball| Gosu::distance(@x, @y, good_ball.x, good_ball.y) < 30}
   end
 end

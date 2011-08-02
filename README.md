@@ -1,10 +1,12 @@
-CREDITS
+----- About -----
 
-NSMBDS background rips from DemonWarrior on TheSpritersResource.
+----- Instructions -----
 
-R.O.B. sprites ripped by Nemu, edited by Tapika on TheSpritersResource.
 
-Jigglypuff sprites from Cybershadow, Pik, and Neopolis on Pixeltendo on TheSpritersResource.
+
+----- Credits -----
+
+"CuteGod" art by Daniel Cook (Lostgarden.com) 
 
 Music from the artists PeterGMusic, Calamalstr, and 15thDimension on Newgrounds.
 
