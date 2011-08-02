@@ -6,6 +6,8 @@ An incredibly simple attempt at a first game in Ruby.
 
 Move left and right with the arrow keys. Avoid the rocks, collect the gems. Hit P to pause the game, Space to continue after hitting something, R to restart the entire game, and Q to quit.
 
+Also, the game chooses at random from five backgrounds and three songs each time you start it. Enjoy!
+
 ----- Credits -----
 
 "CuteGod" art by Daniel Cook (Lostgarden.com) 
