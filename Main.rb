@@ -2,13 +2,13 @@ $: << File.expand_path(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'gosu'
+require 'chipmunk'
 require 'player'
 require 'ball'
 require 'ten_ball'
 require 'fifty_ball'
 require 'hundred_ball'
 require 'map'
-require 'chingu'
 include Gosu
 
 class SpriteDodge < Gosu::Window
@@ -22,7 +22,6 @@ class SpriteDodge < Gosu::Window
     @ten_balls = 2.times.map {Ten_Ball.new(self)}
     @fifty_balls = 1.times.map {Fifty_Ball.new(self)}
     @hundred_balls = 1.times.map {Hundred_Ball.new(self)}
-    @timer = Chingu::Traits::Timer
     @running = true
     @pause = false
     @font = Gosu::Font.new(self, "font/ayearwithoutrain.ttf", 43)

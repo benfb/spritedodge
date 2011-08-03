@@ -11,7 +11,7 @@ class Fifty_Ball
     if @y > @game_window.height
       reset
     else
-      @y = @y + 6
+      @y = @y + 3
     end
   end
   
