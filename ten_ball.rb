@@ -1,7 +1,7 @@
-class Good_Ball
+class Ten_Ball
   def initialize(game_window)
     @game_window = game_window
-    @icon = Gosu::Image.new(@game_window, "img/good_ball.png", true)
+    @icon = Gosu::Image.new(@game_window, "img/ten_ball.png", true)
     @rotation = 0
     @get_sound = Gosu::Sample.new(@game_window, "sound/get.wav")
     reset
