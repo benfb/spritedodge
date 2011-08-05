@@ -2,7 +2,6 @@ $: << File.expand_path(File.dirname(__FILE__))
 
 require 'rubygems'
 require 'gosu'
-require 'chipmunk'
 require 'player'
 require 'ball'
 require 'ten_ball'
@@ -28,7 +27,6 @@ class SpriteDodge < Gosu::Window
     @hit_sound = Gosu::Sample.new(self, "sound/hit.wav")
     @get_sound = Gosu::Sample.new(self, "sound/get.wav")
     @bgnumber = rand(5)
-   # @map = Map.new(self, "lvl/1.txt")
     @background_image = Gosu::Image.new(self, "bg/#{@bgnumber}.png", true)
     @score = 0
     @health = 100
@@ -112,10 +110,10 @@ class SpriteDodge < Gosu::Window
     @ten_balls.each {|ten_ball| ten_ball.draw}
     @fifty_balls.each {|fifty_ball| fifty_ball.draw}
     @hundred_balls.each {|hundred_ball| hundred_ball.draw}
-    @font.draw_rel("The game is paused.", 400, 300, 10, 0.5, 0.5, factor_x=1, factor_y=1, Gosu::Color::BLACK) if @pause == true
-    @font.draw_rel("Score: #{@score}", 40, 10, 10, 0.0, 0.0, factor_x=1, factor_y=1, Gosu::Color::BLACK)
-    @font.draw_rel("Health: #{@health}", 650, 10, 10, 0.0, 0.0, factor_x=1, factor_y=1, Gosu::Color::BLACK)
-    @font.draw_rel("GAME OVER. Press R to restart!", 400, 300, 13, 0.5, 0.5, factor_x=1, factor_y=1, Gosu::Color::BLACK) if @health <= 0
+    @font.draw_rel("The game is paused.", 400, 300, 10, 0.5, 0.5, 1, 1, Gosu::Color::BLACK) if @pause == true
+    @font.draw_rel("Score: #{@score}", 40, 10, 10, 0.0, 0.0, 1, 1, Gosu::Color::BLACK)
+    @font.draw_rel("Health: #{@health}", 650, 10, 10, 0.0, 0.0, 1, 1, Gosu::Color::BLACK)
+    @font.draw_rel("GAME OVER. Press R to restart!", 400, 300, 13, 0.5, 0.5, 1, 1, Gosu::Color::BLACK) if @health <= 0
   end
   
   def stop_game

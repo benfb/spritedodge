@@ -16,7 +16,7 @@ class Fifty_Ball
   end
   
   def draw
-    @icon.draw(@x,@y,3)
+    @icon.draw_rot(@x,@y,3, 0, 0.5, 0.5)
   end
   
   def x

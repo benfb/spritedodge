@@ -16,11 +16,11 @@ class Ball
   end
   
   def draw
-    @icon.draw(@x,@y,2)
+    @icon.draw(@x,@y, 2)
   end
   
   def draw_rot
-    @icon.draw_rot(@x,@y,2, @rotation += 1, factor_x=1, factor_y=1)
+    @icon.draw_rot(@x,@y,2, @rotation += 1, 0.5, 0.5, 1, 1)
   end
   
   def x
