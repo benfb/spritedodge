@@ -11,7 +11,7 @@ class Ball
     if @y > @game_window.height
       reset
     else
-      @y = @y + 5
+      @y = @y + 6
     end
   end
   
@@ -20,7 +20,7 @@ class Ball
   end
   
   def draw_rot
-    @icon.draw_rot(@x,@y,2, @rotation += 1, 0.5, 0.5, 1, 1)
+    @icon.draw_rot(@x,@y,2, @rotation += 3, 0.5, 0.5, 1, 1)
   end
   
   def x

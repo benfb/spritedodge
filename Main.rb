@@ -28,6 +28,7 @@ class SpriteDodge < Gosu::Window
     @get_sound = Gosu::Sample.new(self, "sound/get.wav")
     @bgnumber = rand(5)
     @background_image = Gosu::Image.new(self, "bg/#{@bgnumber}.png", true)
+    @scores = []
     @score = 0
     @health = 100
   end
@@ -67,7 +68,9 @@ class SpriteDodge < Gosu::Window
       if @player1.hit_by? @balls
         @health -= 10
         @hit_sound.play(vol=0.5, speed=1, looping=false)
+        @hit = true
         stop_game
+        @hit = false
       end
       
       if @player1.hit_by_good? @ten_balls
@@ -105,15 +108,19 @@ class SpriteDodge < Gosu::Window
     @background_image.draw(0, 0, 0)
     #@map.draw
     @player1.draw
-    @balls.each {|ball| ball.draw} if @running == false
-    @balls.each {|ball| ball.draw_rot} if @running == true
+    @balls.each {|ball| ball.draw_rot}
     @ten_balls.each {|ten_ball| ten_ball.draw}
     @fifty_balls.each {|fifty_ball| fifty_ball.draw}
     @hundred_balls.each {|hundred_ball| hundred_ball.draw}
     @font.draw_rel("The game is paused.", 400, 300, 10, 0.5, 0.5, 1, 1, Gosu::Color::BLACK) if @pause == true
+    @font.draw_rel("You got hit! Press space to continue.", 400, 300, 10, 0.5, 0.5, 1, 1, Gosu::Color::BLACK) if @hit == true
     @font.draw_rel("Score: #{@score}", 40, 10, 10, 0.0, 0.0, 1, 1, Gosu::Color::BLACK)
     @font.draw_rel("Health: #{@health}", 650, 10, 10, 0.0, 0.0, 1, 1, Gosu::Color::BLACK)
-    @font.draw_rel("GAME OVER. Press R to restart!", 400, 300, 13, 0.5, 0.5, 1, 1, Gosu::Color::BLACK) if @health <= 0
+    if @health <= 0
+      @scores.push(@score)
+      @font.draw_rel("Game over. Press R to restart!", 400, 300, 13, 0.5, 0.5, 1, 1, Gosu::Color::BLACK)
+      @font.draw_rel("Your score was #{@scores.last}, position #{@scores.index(@score)} of #{@scores.length}.", 400, 200, 13, 0.5, 0.5, 1, 1, Gosu::Color::BLACK)
+    end  
   end
   
   def stop_game
