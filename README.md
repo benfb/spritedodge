@@ -15,12 +15,12 @@ Also, the game chooses at random from five backgrounds and three songs each time
 
 ## Credits
 
-"CuteGod" art by Daniel Cook (Lostgarden.com) 
+* "CuteGod" art by Daniel Cook (Lostgarden.com) 
 
-Music from the artists PeterGMusic, Calamalstr, and 15thDimension on Newgrounds.
+* Music from the artists PeterGMusic, Calamalstr, and 15thDimension on Newgrounds.
 
-Sound effects from the free archive at the Absolute Sound Effects Archive.
+* Sound effects from the free archive at the Absolute Sound Effects Archive.
 
-Font from Kimberly Geswein on dafont.
+* Font from Kimberly Geswein on dafont.
 
-All code written by Ben Bailey.
+* All code written by Ben Bailey.
