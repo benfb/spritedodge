@@ -30,7 +30,7 @@ class SpriteDodge < Gosu::Window
     @background_image = Gosu::Image.new(self, "bg/#{@bgnumber}.png", true)
     @scores = []
     @score = 0
-    @health = 100
+    @health = 50
   end
   
   def button_down(id)
@@ -117,9 +117,13 @@ class SpriteDodge < Gosu::Window
     @font.draw_rel("Score: #{@score}", 40, 10, 10, 0.0, 0.0, 1, 1, Gosu::Color::BLACK)
     @font.draw_rel("Health: #{@health}", 650, 10, 10, 0.0, 0.0, 1, 1, Gosu::Color::BLACK)
     if @health <= 0
+      @game_over = true
       @scores.push(@score)
+      @health = 100
+    end
+    if @game_over == true
       @font.draw_rel("Game over. Press R to restart!", 400, 300, 13, 0.5, 0.5, 1, 1, Gosu::Color::BLACK)
-      @font.draw_rel("Your score was #{@scores.last}, position #{@scores.index(@score)} of #{@scores.length}.", 400, 200, 13, 0.5, 0.5, 1, 1, Gosu::Color::BLACK)
+      @font.draw_rel("Your score was #{@scores.last}, position #{@scores.index(@score) + 1} of #{@scores.length}.", 400, 200, 13, 0.5, 0.5, 1, 1, Gosu::Color::BLACK)
     end  
   end
   
@@ -142,7 +146,9 @@ class SpriteDodge < Gosu::Window
     @fifty_balls.each {|fifty_ball| fifty_ball.reset}
     @hundred_balls.each {|hundred_ball| hundred_ball.reset}
     @score = 0
-    @health = 100
+    @scores.sort! { |x,y| y <=> x }
+    @health = 50
+    @game_over = false
     @background_image.draw(0, 0, 0)
   end
 
